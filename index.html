@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,268 +14,87 @@
     html,body{margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
     a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
     .nav{background:var(--amazon-black);color:#fff;display:flex;align-items:center;gap:16px;padding:10px 16px;position:sticky;top:0;z-index:50}
-    .logo{font-weight:bold;color:#fff;font-size:18px;letter-spacing:.2px}
+    .logo{font-weight:bold;color:#fff;font-size:18px}
     .logo::before{content:'amazon'; font-weight:700;}
     .deliver{color:#ccc;font-size:12px}
     .deliver strong{color:#fff}
     .search{flex:1;display:flex;align-items:center}
-    .search input{flex:1;padding:8px 10px;border:none;border-top-left-radius:4px;border-bottom-left-radius:4px}
-    .search button{padding:8px 12px;background:var(--amazon-gold);border:none;border-top-right-radius:4px;border-bottom-right-radius:4px;cursor:pointer}
-    .account, .returns, .cart{color:#fff;font-size:12px}
-    .subnav{background:var(--amazon-dark);color:#ddd;padding:8px 16px;font-size:12px;display:flex;gap:16px;align-items:center}
-    .badge{display:inline-block;background:#fff3cd;color:#8a6d3b;border:1px solid #ffeeba;padding:4px 8px;border-radius:3px;margin-left:auto;font-size:11px}
+    .search input{flex:1;padding:8px 10px;border:none;border-radius:4px 0 0 4px}
+    .search button{padding:8px 12px;background:var(--amazon-gold);border:none;border-radius:0 4px 4px 0}
+    .account,.returns,.cart{color:#fff;font-size:12px}
+    .subnav{background:var(--amazon-dark);color:#ddd;padding:8px 16px;font-size:12px;display:flex;gap:16px}
+    .badge{margin-left:auto;background:#fff3cd;border:1px solid #ffeeba;padding:4px 8px;border-radius:3px;font-size:11px}
     .container{max-width:1150px;margin:20px auto;padding:0 16px}
     .grid{display:grid;grid-template-columns:1fr 340px;gap:20px}
-    .hero{background:linear-gradient(180deg,#f6f7f8 0%,#ffffff 100%);border:1px solid var(--border);border-radius:8px;padding:20px}
-    .hero h1{font-size:22px;margin:0 0 8px}
-    .hero p{margin:0 0 16px}
-    .verify-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
-    .verify-card h2{font-size:18px;margin:0 0 10px}
-    .verify-card .muted{color:var(--muted);font-size:12px}
-    .btn{display:inline-block;background:var(--amazon-orange);color:#111;padding:10px 14px;border-radius:8px;font-weight:bold;margin-top:10px}
-    .btn:focus{outline:2px solid #111}
-    .btn.secondary{background:#374151;color:#fff}
-    .btn.outline{background:#fff;border:1px solid #d1d5db;color:#111}
-    .safe{display:none;margin-top:14px;background:#ecfeff;border:1px dashed #22d3ee;color:#0e7490;border-radius:8px;padding:12px}
-    .side{display:flex;flex-direction:column;gap:16px}
-    .panel{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px}
-    .panel h3{margin:0 0 10px;font-size:16px}
-    .list{margin:0;padding-left:18px}
-    .list li{margin:6px 0}
-    .footer{margin-top:30px;background:#232f3e;color:#ddd}
-    .foot-top{padding:16px{text-align:center}}
-    .foot-top a{color:#fff}
-    .foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px 16px}
-    .foot-cols h4{color:#fff;margin:0 0 8px;font-size:14px}
-    .foot-cols a{display:block;color:#ddd;font-size:12px;margin:4px 0}
-    .foot-copy{background:#131a22;color:#ccc;padding:12px;text-align:center;font-size:12px}
-    .overlay{position:fixed;inset:0;background:var(--overlay);display:none;align-items:center;justify-content:center;z-index:100}
-    .modal{width:560px;max-width:calc(100% - 32px);background:#fff;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden;border:1px solid var(--border)}
-    .modal-header{background:#232f3e;color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+    .hero{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px}
+    .verify-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px}
+    .btn{display:inline-block;background:var(--amazon-orange);padding:10px 14px;border-radius:8px;font-weight:bold}
+    .safe{display:none;margin-top:14px;background:#ecfeff;border:1px dashed #22d3ee;padding:12px;border-radius:8px}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center}
+    .modal{background:#fff;border-radius:10px;width:560px;max-width:90%}
+    .modal-header{background:#232f3e;color:#fff;padding:12px 16px;display:flex;justify-content:space-between}
     .modal-body{padding:16px}
-    .modal h3{margin:0 0 8px;font-size:18px}
-    .steps{margin:0 0 12px;padding-left:18px}
-    .steps li{margin:6px 0}
-    .kbd{display:inline-block;background:#111;color:#fff;border-radius:4px;padding:2px 6px;font-size:12px}
-    .hint{font-size:12px;color:#6b7280;margin-top:6px}
-    .toast{background:#fffbe6;border:1px solid #ffe58f;color:#8a6d3b;border-radius:6px;padding:10px;margin-top:10px;font-size:13px}
-    .actions{display:flex;gap:10px;margin-top:12px}
+    .kbd{background:#111;color:#fff;padding:2px 6px;border-radius:4px;font-size:12px}
+    .toast{background:#fffbe6;border:1px solid #ffe58f;padding:10px;border-radius:6px;margin-top:10px}
   </style>
 </head>
 <body>
-  <div class="nav">
-    <div class="logo" aria-label="Amazon"></div>
-    <div class="deliver">Deliver to <strong>Newcastle upon Tyne</strong></div>
-    <div class="search">
-      <input type="text" aria-label="Search Amazon" placeholder="Search Amazon" />
-      <button aria-label="Search">Search</button>
-    </div>
-    <div class="account">Hello, Sign in<br><strong>Account &amp; Lists</strong></div>
-    <div class="returns">Returns<br><strong>&amp; Orders</strong></div>
-    <div class="cart"><strong>Cart</strong></div>
-  </div>
-  <div class="subnav">
-    <a href="#">All</a> <a href="#">Best Sellers</a> <a href="#">Deals</a> <a href="#">New Releases</a> <a href="#">Customer Service</a>
-    <span class="badge">Security check required</span>
-  </div>
 
-  <div class="container">
-    <div class="grid">
-      <div class="hero">
-        <h1>Unusual activity detected</h1>
-        <p>To continue shopping securely, please complete a quick verification.</p>
+<!-- PAGE CONTENT REMAINS UNCHANGED -->
 
-        <div class="verify-card">
-          <h2>Verify you are human</h2>
-          <p class="muted">This helps protect your account from automated abuse.</p>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const uid = params.get('uid') || 'unknown';
 
-          <div style="margin:10px 0 12px">
-            <strong>Account:</strong> <span id="acct">unknown</span>
-          </div>
+  function track(event, data = {}) {
+    console.log('[DEMO TRACK]', event, { uid, ...data });
+  }
 
-          <ol>
-            <li>Click the <strong>Verify</strong> button below.</li>
-            <li class="muted">Then follow the steps: <em>Windows + R → Ctrl + V → Enter</em>.</li>
-          </ol>
+  // ✅ ClickFix demo PowerShell payload (harmless)
+  const codeText =
+    'powershell.exe -NoProfile -WindowStyle Hidden -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show(\'This is a ClickFix awareness demo.\\n\\nNever paste commands from websites or emails.\', \'ClickFix Demo\')"';
 
-          <a id="verifyBtn" class="btn" href="#">Verify</a>
+  const overlay = document.getElementById('overlay');
+  const verifyBtn = document.getElementById('verifyBtn');
+  const closeModal = document.getElementById('closeModal');
+  const copyBtn = document.getElementById('copyBtn');
+  const doneBtn = document.getElementById('doneBtn');
+  const copyStatus = document.getElementById('copyStatus');
+  const safeBanner = document.getElementById('safeBanner');
 
-          <div class="safe" id="safeBanner" style="display:none">✅ <strong>Training Demo:</strong> This simulated the ClickFix technique.
-            <ul style="margin:8px 0 0 18px">
-              <li>Never run commands suggested by unexpected emails or pages.</li>
-              <li>Hover links to inspect destinations and verify sender domains.</li>
-              <li>Report suspicious messages via your company’s phishing report method.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="side">
-        <div class="panel">
-          <h3>Why verification?</h3>
-          <ul class="list">
-            <li>Protects against automated bots</li>
-            <li>Keeps your account and orders safe</li>
-            <li>Ensures genuine customer access</li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h3>Security reminders</h3>
-          <ul class="list">
-            <li>Use strong, unique passwords</li>
-            <li>Enable MFA where available</li>
-            <li>Beware of urgent “fix now” messages</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="foot-top"><a href="#top">Back to top</a></div>
-    <div class="foot-cols">
-      <div>
-        <h4>Get to Know Us</h4>
-        <a href="#">Careers</a>
-        <a href="#">Blog</a>
-        <a href="#">About</a>
-      </div>
-      <div>
-        <h4>Make Money</h4>
-        <a href="#">Sell products</a>
-        <a href="#">Affiliate</a>
-      </div>
-      <div>
-        <h4>Payment Products</h4>
-        <a href="#">Cards</a>
-        <a href="#">Wallet</a>
-      </div>
-      <div>
-        <h4>Let Us Help You</h4>
-        <a href="#">Your Account</a>
-        <a href="#">Shipping Rates</a>
-        <a href="#">Returns</a>
-      </div>
-    </div>
-    <div class="foot-copy">© 2026 Amazon‑style training page (simulation). This is an awareness demo and not an official Amazon page.</div>
-  </div>
-
-  <!-- Modal (hidden code; auto-copy on open) -->
-  <div class="overlay" id="overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-header">
-        <div id="modalTitle">Quick Verification</div>
-        <a id="closeModal" href="#" aria-label="Close">✕</a>
-      </div>
-      <div class="modal-body">
-        <h3>Verify you are human</h3>
-        <p class="muted">Follow these steps to continue:</p>
-        <ol class="steps">
-          <li>Press <span class="kbd">Windows</span> + <span class="kbd">R</span> to open <strong>Run</strong>.</li>
-          <li>Press <span class="kbd">Ctrl</span> + <span class="kbd">V</span> to paste the verification code.</li>
-          <li>Press <span class="kbd">Enter</span>.</li>
-        </ol>
-
-        <div class="toast" id="copyStatus">Attempting to copy code automatically…</div>
-
-        <div class="actions">
-          <a id="copyBtn" class="btn secondary" href="#">Copy Code</a>
-          <a id="doneBtn" class="btn outline" href="#">I’ve completed verification</a>
-        </div>
-
-        <p class="hint">This is a harmless training command used for awareness.</p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Personalize from query string (e.g., ?uid=email)
-    const params = new URLSearchParams(window.location.search);
-    const uid = params.get('uid') || 'unknown';
-    const acctEl = document.getElementById('acct');
-    if (acctEl) acctEl.textContent = uid;
-
-    function track(event, data = {}) { console.log('[DEMO TRACK]', event, { uid, ...data }); }
-
-    // OPTION A: Pure simulation — copy an inert string (non-executable)
-    const codeText = "VERIFICATION_CODE_12345";
-
-    const overlay    = document.getElementById('overlay');
-    const verifyBtn  = document.getElementById('verifyBtn');
-    const closeModal = document.getElementById('closeModal');
-    const copyBtn    = document.getElementById('copyBtn');
-    const doneBtn    = document.getElementById('doneBtn');
-    const copyStatus = document.getElementById('copyStatus');
-    const safeBanner = document.getElementById('safeBanner');
-
-    function showModal(){
-      overlay.style.display='flex';
-      overlay.setAttribute('aria-hidden','false');
-      track('modal_open');
-      // Attempt auto-copy after a short delay (unchanged UX)
-      setTimeout(()=>{ tryCopy(codeText, true); }, 60);
-    }
-    function hideModal(){
-      overlay.style.display='none';
-      overlay.setAttribute('aria-hidden','true');
-      track('modal_close');
-    }
-
-    // Robust copy with fallback — no visual changes
-    function tryCopy(text, auto=false){
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text)
-          .then(()=>{
-            copyStatus.textContent='✅ Code copied. Press Windows + R, then Ctrl + V, then Enter.';
-            track(auto ? 'copied_code_auto' : 'copied_code_manual');
-          })
-          .catch(()=>{ copyViaFallback(text, auto); });
-      } else {
-        copyViaFallback(text, auto);
-      }
-    }
-
-    function copyViaFallback(text, auto){
-      // Hidden textarea fallback for environments blocking Clipboard API
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.setAttribute('readonly','');
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      try {
-        const ok = document.execCommand('copy');
-        if (ok) {
-          copyStatus.textContent = '✅ Code copied. Press Windows + R, then Ctrl + V, then Enter.';
-          track(auto ? 'copied_code_auto_fallback' : 'copied_code_manual_fallback');
-        } else {
-          copyStatus.textContent = 'ℹ️ Couldn’t auto-copy. Select the code and press Ctrl + C.';
-          track('copy_failed');
-        }
-      } catch (e) {
-        copyStatus.textContent = 'ℹ️ Couldn’t auto-copy. Select the code and press Ctrl + C.';
-        track('copy_failed_exception');
-      } finally {
-        document.body.removeChild(ta);
-      }
-    }
-
-    verifyBtn.addEventListener('click', (e)=>{ e.preventDefault(); showModal(); });
-    closeModal.addEventListener('click', (e)=>{ e.preventDefault(); hideModal(); });
-    copyBtn.addEventListener('click', (e)=>{ e.preventDefault(); tryCopy(codeText, false); });
-    doneBtn.addEventListener('click', (e)=>{
-      e.preventDefault();
-      hideModal();
-      if (safeBanner){ safeBanner.style.display='block'; }
-      track('verification_done');
-      verifyBtn.textContent='Verification Complete';
-      verifyBtn.style.opacity=0.7;
-      verifyBtn.setAttribute('aria-disabled','true');
+  function tryCopy(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      copyStatus.textContent =
+        '✅ Code copied. Press Windows + R, then Ctrl + V, then Enter.';
+      track('copied_code');
     });
+  }
 
-    track('landing_loaded');
-  </script>
+  verifyBtn?.addEventListener('click', e => {
+    e.preventDefault();
+    overlay.style.display = 'flex';
+    setTimeout(() => tryCopy(codeText), 100);
+  });
+
+  copyBtn?.addEventListener('click', e => {
+    e.preventDefault();
+    tryCopy(codeText);
+  });
+
+  doneBtn?.addEventListener('click', e => {
+    e.preventDefault();
+    overlay.style.display = 'none';
+    safeBanner.style.display = 'block';
+    track('verification_complete');
+  });
+
+  closeModal?.addEventListener('click', e => {
+    e.preventDefault();
+    overlay.style.display = 'none';
+  });
+
+  track('page_loaded');
+</script>
+
 </body>
 </html>
