@@ -14,33 +14,29 @@
     html,body{margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
     a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
     .nav{background:var(--amazon-black);color:#fff;display:flex;align-items:center;gap:16px;padding:10px 16px;position:sticky;top:0;z-index:50}
-    .logo{font-weight:bold;color:#fff;font-size:18px}
+    .logo{font-weight:bold;color:#fff;font-size:18px;letter-spacing:.2px}
     .logo::before{content:'amazon'; font-weight:700;}
     .deliver{color:#ccc;font-size:12px}
     .deliver strong{color:#fff}
     .search{flex:1;display:flex;align-items:center}
-    .search input{flex:1;padding:8px 10px;border:none;border-radius:4px 0 0 4px}
-    .search button{padding:8px 12px;background:var(--amazon-gold);border:none;border-radius:0 4px 4px 0}
-    .account,.returns,.cart{color:#fff;font-size:12px}
-    .subnav{background:var(--amazon-dark);color:#ddd;padding:8px 16px;font-size:12px;display:flex;gap:16px}
-    .badge{margin-left:auto;background:#fff3cd;border:1px solid #ffeeba;padding:4px 8px;border-radius:3px;font-size:11px}
+    .search input{flex:1;padding:8px 10px;border:none;border-top-left-radius:4px;border-bottom-left-radius:4px}
+    .search button{padding:8px 12px;background:var(--amazon-gold);border:none;border-top-right-radius:4px;border-bottom-right-radius:4px;cursor:pointer}
+    .account, .returns, .cart{color:#fff;font-size:12px}
+    .subnav{background:var(--amazon-dark);color:#ddd;padding:8px 16px;font-size:12px;display:flex;gap:16px;align-items:center}
+    .badge{display:inline-block;background:#fff3cd;color:#8a6d3b;border:1px solid #ffeeba;padding:4px 8px;border-radius:3px;margin-left:auto;font-size:11px}
     .container{max-width:1150px;margin:20px auto;padding:0 16px}
     .grid{display:grid;grid-template-columns:1fr 340px;gap:20px}
-    .hero{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px}
-    .verify-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px}
-    .btn{display:inline-block;background:var(--amazon-orange);padding:10px 14px;border-radius:8px;font-weight:bold}
-    .safe{display:none;margin-top:14px;background:#ecfeff;border:1px dashed #22d3ee;padding:12px;border-radius:8px}
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center}
-    .modal{background:#fff;border-radius:10px;width:560px;max-width:90%}
-    .modal-header{background:#232f3e;color:#fff;padding:12px 16px;display:flex;justify-content:space-between}
-    .modal-body{padding:16px}
-    .kbd{background:#111;color:#fff;padding:2px 6px;border-radius:4px;font-size:12px}
-    .toast{background:#fffbe6;border:1px solid #ffe58f;padding:10px;border-radius:6px;margin-top:10px}
+    .hero{background:linear-gradient(180deg,#f6f7f8 0%,#ffffff 100%);border:1px solid var(--border);border-radius:8px;padding:20px}
+    .verify-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
+    .btn{display:inline-block;background:var(--amazon-orange);color:#111;padding:10px 14px;border-radius:8px;font-weight:bold;margin-top:10px}
+    .safe{display:none;margin-top:14px;background:#ecfeff;border:1px dashed #22d3ee;color:#0e7490;border-radius:8px;padding:12px}
+    .overlay{position:fixed;inset:0;background:var(--overlay);display:none;align-items:center;justify-content:center;z-index:100}
+    .modal{width:560px;max-width:calc(100% - 32px);background:#fff;border-radius:10px}
   </style>
 </head>
 <body>
 
-<!-- PAGE CONTENT REMAINS UNCHANGED -->
+<!-- PAGE CONTENT UNCHANGED -->
 
 <script>
   const params = new URLSearchParams(window.location.search);
@@ -50,9 +46,9 @@
     console.log('[DEMO TRACK]', event, { uid, ...data });
   }
 
-  // ✅ ClickFix demo PowerShell payload (harmless)
+  // ✅ WORKING ClickFix demo payload (Win+R safe, STA enforced)
   const codeText =
-    'powershell.exe -NoProfile -WindowStyle Hidden -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show(\'This is a ClickFix awareness demo.\\n\\nNever paste commands from websites or emails.\', \'ClickFix Demo\')"';
+    "powershell.exe -NoProfile -Sta -Command \"Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('This is a ClickFix awareness demo.`n`nNever paste commands from websites or emails.','ClickFix Demo')\"";
 
   const overlay = document.getElementById('overlay');
   const verifyBtn = document.getElementById('verifyBtn');
@@ -62,38 +58,38 @@
   const copyStatus = document.getElementById('copyStatus');
   const safeBanner = document.getElementById('safeBanner');
 
-  function tryCopy(text) {
-    navigator.clipboard.writeText(text).then(() => {
+  function tryCopy(text, auto=false){
+    navigator.clipboard.writeText(text).then(()=>{
       copyStatus.textContent =
         '✅ Code copied. Press Windows + R, then Ctrl + V, then Enter.';
-      track('copied_code');
+      track(auto ? 'copied_code_auto' : 'copied_code_manual');
     });
   }
 
-  verifyBtn?.addEventListener('click', e => {
+  verifyBtn.addEventListener('click', e => {
     e.preventDefault();
     overlay.style.display = 'flex';
-    setTimeout(() => tryCopy(codeText), 100);
+    setTimeout(() => tryCopy(codeText, true), 80);
   });
 
-  copyBtn?.addEventListener('click', e => {
+  copyBtn.addEventListener('click', e => {
     e.preventDefault();
-    tryCopy(codeText);
+    tryCopy(codeText, false);
   });
 
-  doneBtn?.addEventListener('click', e => {
+  doneBtn.addEventListener('click', e => {
     e.preventDefault();
     overlay.style.display = 'none';
     safeBanner.style.display = 'block';
-    track('verification_complete');
+    track('verification_done');
   });
 
-  closeModal?.addEventListener('click', e => {
+  closeModal.addEventListener('click', e => {
     e.preventDefault();
     overlay.style.display = 'none';
   });
 
-  track('page_loaded');
+  track('landing_loaded');
 </script>
 
 </body>
