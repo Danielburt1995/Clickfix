@@ -1,95 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Amazon — Verify You Are Human</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light only" />
-  <style>
-    :root{
-      --amazon-black:#0f1111; --amazon-dark:#131a22; --amazon-gold:#febd69; --amazon-orange:#f3a847;
-      --bg:#eaeded; --text:#111827; --muted:#6b7280; --link:#007185; --card:#ffffff; --border:#d5d9d9;
-      --overlay: rgba(0,0,0,.55);
-    }
-    html,body{margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
-    a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-    .nav{background:var(--amazon-black);color:#fff;display:flex;align-items:center;gap:16px;padding:10px 16px;position:sticky;top:0;z-index:50}
-    .logo{font-weight:bold;color:#fff;font-size:18px;letter-spacing:.2px}
-    .logo::before{content:'amazon'; font-weight:700;}
-    .deliver{color:#ccc;font-size:12px}
-    .deliver strong{color:#fff}
-    .search{flex:1;display:flex;align-items:center}
-    .search input{flex:1;padding:8px 10px;border:none;border-top-left-radius:4px;border-bottom-left-radius:4px}
-    .search button{padding:8px 12px;background:var(--amazon-gold);border:none;border-top-right-radius:4px;border-bottom-right-radius:4px;cursor:pointer}
-    .account, .returns, .cart{color:#fff;font-size:12px}
-    .subnav{background:var(--amazon-dark);color:#ddd;padding:8px 16px;font-size:12px;display:flex;gap:16px;align-items:center}
-    .badge{display:inline-block;background:#fff3cd;color:#8a6d3b;border:1px solid #ffeeba;padding:4px 8px;border-radius:3px;margin-left:auto;font-size:11px}
-    .container{max-width:1150px;margin:20px auto;padding:0 16px}
-    .grid{display:grid;grid-template-columns:1fr 340px;gap:20px}
-    .hero{background:linear-gradient(180deg,#f6f7f8 0%,#ffffff 100%);border:1px solid var(--border);border-radius:8px;padding:20px}
-    .verify-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
-    .btn{display:inline-block;background:var(--amazon-orange);color:#111;padding:10px 14px;border-radius:8px;font-weight:bold;margin-top:10px}
-    .safe{display:none;margin-top:14px;background:#ecfeff;border:1px dashed #22d3ee;color:#0e7490;border-radius:8px;padding:12px}
-    .overlay{position:fixed;inset:0;background:var(--overlay);display:none;align-items:center;justify-content:center;z-index:100}
-    .modal{width:560px;max-width:calc(100% - 32px);background:#fff;border-radius:10px}
-  </style>
+<meta charset="utf-8">
+<title>Amazon.co.uk — Verify Account</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  background:#eaeded;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#0f1111;
+}
+.nav{
+  background:#131921;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:10px 16px;
+}
+.logo{font-size:22px;font-weight:bold}
+.logo::after{content:".co.uk";font-size:12px}
+.search{flex:1;display:flex}
+.search input{flex:1;padding:8px;border:none}
+.search button{background:#febd69;border:none;padding:8px 12px}
+.nav-item{font-size:12px}
+
+.subnav{
+  background:#232f3e;
+  color:#ddd;
+  padding:8px 16px;
+  font-size:13px;
+}
+
+.container{
+  display:grid;
+  grid-template-columns:3fr 1fr;
+  gap:24px;
+  max-width:1200px;
+  margin:24px auto;
+  padding:0 16px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #d5d9d9;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:16px;
+}
+.product{
+  border:1px solid #d5d9d9;
+  border-radius:6px;
+  padding:12px;
+  font-size:13px;
+}
+.product img{
+  width:100%;
+  height:140px;
+  object-fit:contain;
+  background:#fff;
+}
+.price{color:#B12704;font-weight:bold}
+.rating{color:#f59e0b}
+
+.btn{
+  display:inline-block;
+  background:#f3a847;
+  padding:10px 16px;
+  border-radius:8px;
+  text-decoration:none;
+  color:#111;
+  font-weight:bold;
+}
+.btn:hover{background:#f0c14b}
+
+.sidebar .ad{
+  background:#fff;
+  border:1px solid #d5d9d9;
+  border-radius:8px;
+  padding:14px;
+  font-size:13px;
+  margin-bottom:16px;
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+.modal{
+  background:#fff;
+  width:520px;
+  padding:20px;
+  border-radius:8px;
+}
+.kbd{
+  background:#111;
+  color:#fff;
+  padding:2px 6px;
+  border-radius:4px;
+  font-size:12px;
+}
+.safe{
+  display:none;
+  background:#f1fdf7;
+  border:1px solid #2dd4bf;
+  padding:12px;
+  border-radius:6px;
+  font-size:13px;
+}
+</style>
 </head>
+
 <body>
 
-<!-- PAGE CONTENT UNCHANGED -->
+<div class="nav">
+  <div class="logo">amazon</div>
+  <div class="search">
+    <input placeholder="Search Amazon">
+    <button>Search</button>
+  </div>
+  <div class="nav-item">Hello, sign in<br><strong>Account & Lists</strong></div>
+  <div class="nav-item">Returns<br><strong>& Orders</strong></div>
+  <div class="nav-item"><strong>Cart</strong></div>
+</div>
+
+<div class="subnav">
+  All · Best Sellers · Prime · Deals · Customer Service
+</div>
+
+<div class="container">
+
+  <div>
+    <div class="card">
+      <h1>Verify you are human</h1>
+      <p>We detected unusual activity on your account.</p>
+      <ol>
+        <li>Click <strong>Verify</strong></li>
+        <li>Press <strong>Windows + R</strong></li>
+        <li>Press <strong>Ctrl + V</strong>, then <strong>Enter</strong></li>
+      </ol>
+      <a href="#" id="verifyBtn" class="btn">Verify</a>
+      <div id="safeBanner" class="safe">
+        ✅ <strong>Training Demo</strong><br>
+        This page demonstrates the ClickFix technique.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Sponsored products</h2>
+      <div class="products">
+
+        <div class="product">
+          <img src="https://source.unsplash.com/400x400/?wireless,mouse" alt="Wireless Mouse">
+          Wireless Mouse
+          <div class="rating">★★★★☆ (2,134)</div>
+          <div class="price">£14.99</div>
+        </div>
+
+        <div class="product">
+          <img src="https://source.unsplash.com/400x400/?usb-c,hub" alt="USB-C Hub">
+          USB‑C Hub
+          <div class="rating">★★★★☆ (4,982)</div>
+          <div class="price">£22.49</div>
+        </div>
+
+        <div class="product">
+          <img src="https://source.unsplash.com/400x400/?laptop,stand" alt="Laptop Stand">
+          Laptop Stand
+          <div class="rating">★★★★★ (1,204)</div>
+          <div class="price">£34.99</div>
+        </div>
+
+        <div class="product">
+          <img src="https://source.unsplash.com/400x400/?noise,cancelling,headphones" alt="Headphones">
+          Noise Cancelling Headphones
+          <div class="rating">★★★★☆ (9,321)</div>
+          <div class="price">£59.99</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="ad">
+      <strong>Echo Dot (5th Gen)</strong><br>
+      Smart speaker with Alexa<br>
+      <span class="price">£29.99</span>
+    </div>
+    <div class="ad">
+      <strong>Kindle Paperwhite</strong><br>
+      Waterproof · 8GB<br>
+      <span class="price">£99.99</span>
+    </div>
+    <div class="ad">
+      <strong>Fire TV Stick 4K</strong><br>
+      Streaming device<br>
+      <span class="price">£39.99</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3>Quick verification</h3>
+    <ol>
+      <li><span class="kbd">Windows</span> + <span class="kbd">R</span></li>
+      <li><span class="kbd">Ctrl</span> + <span class="kbd">V</span></li>
+      <li><span class="kbd">Enter</span></li>
+    </ol>
+    <p id="copyStatus">Copying verification code…</p>
+    <a href="#" id="doneBtn" class="btn">Done</a>
+  </div>
+</div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const uid = params.get('uid') || 'unknown';
+const codeText =
+`cmd.exe /k "color 4f & cls & echo YOUR FILES ARE LOCKED & echo. & echo Ransomware Group: NotAScamPromise & echo BTC Wallet: 1NotAScamPromiseDemoBTC & echo. & echo Payment required to restore access. & echo Do NOT shut down this system. & pause"`;
 
-  function track(event, data = {}) {
-    console.log('[DEMO TRACK]', event, { uid, ...data });
-  }
+const overlay=document.getElementById('overlay');
+const verifyBtn=document.getElementById('verifyBtn');
+const doneBtn=document.getElementById('doneBtn');
+const safeBanner=document.getElementById('safeBanner');
+const copyStatus=document.getElementById('copyStatus');
 
-  // ✅ WORKING ClickFix demo payload (Win+R safe, STA enforced)
-  const codeText =
-    "powershell.exe -NoProfile -Sta -Command \"Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('This is a ClickFix awareness demo.`n`nNever paste commands from websites or emails.','ClickFix Demo')\"";
-
-  const overlay = document.getElementById('overlay');
-  const verifyBtn = document.getElementById('verifyBtn');
-  const closeModal = document.getElementById('closeModal');
-  const copyBtn = document.getElementById('copyBtn');
-  const doneBtn = document.getElementById('doneBtn');
-  const copyStatus = document.getElementById('copyStatus');
-  const safeBanner = document.getElementById('safeBanner');
-
-  function tryCopy(text, auto=false){
-    navigator.clipboard.writeText(text).then(()=>{
-      copyStatus.textContent =
-        '✅ Code copied. Press Windows + R, then Ctrl + V, then Enter.';
-      track(auto ? 'copied_code_auto' : 'copied_code_manual');
-    });
-  }
-
-  verifyBtn.addEventListener('click', e => {
-    e.preventDefault();
-    overlay.style.display = 'flex';
-    setTimeout(() => tryCopy(codeText, true), 80);
+verifyBtn.onclick=e=>{
+  e.preventDefault();
+  overlay.style.display="flex";
+  navigator.clipboard.writeText(codeText).then(()=>{
+    copyStatus.textContent="✅ Code copied. Press Windows + R, Ctrl + V, Enter.";
   });
+};
 
-  copyBtn.addEventListener('click', e => {
-    e.preventDefault();
-    tryCopy(codeText, false);
-  });
-
-  doneBtn.addEventListener('click', e => {
-    e.preventDefault();
-    overlay.style.display = 'none';
-    safeBanner.style.display = 'block';
-    track('verification_done');
-  });
-
-  closeModal.addEventListener('click', e => {
-    e.preventDefault();
-    overlay.style.display = 'none';
-  });
-
-  track('landing_loaded');
+doneBtn.onclick=e=>{
+  e.preventDefault();
+  overlay.style.display="none";
+  safeBanner.style.display="block";
+};
 </script>
 
 </body>
